@@ -1,0 +1,19 @@
+"C:\Users\Mvideo 048\.CLion2019.2\system\cygwin_cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/cygdrive/c/Users/Mvideo 048/Documents/GitHub/CEBEN-master"
+
+[hunter ** FATAL ERROR **] HUNTER_ROOT (/home/Mvideo 048/.hunter) contains spaces.
+[hunter ** FATAL ERROR **] Set HUNTER_ALLOW_SPACES_IN_PATH=ON to skip this error
+[hunter ** FATAL ERROR **] (Use at your own risk!)
+[hunter ** FATAL ERROR **] [Directory:/cygdrive/c/Users/Mvideo 048/Documents/GitHub/CEBEN-master]
+
+------------------------------ ERROR ------------------------------
+    https://docs.hunter.sh/en/latest/reference/errors/error.spaces.in.hunter.root.html
+-------------------------------------------------------------------
+
+CMake Error at tools/gate/cmake/HunterGate.cmake:87 (message):
+Call Stack (most recent call first):
+  tools/gate/cmake/HunterGate.cmake:111 (hunter_gate_error_page)
+  tools/gate/cmake/HunterGate.cmake:468 (hunter_gate_fatal_error)
+  CMakeLists.txt:16 (HunterGate)
+
+
+-- Configuring incomplete, errors occurred!
