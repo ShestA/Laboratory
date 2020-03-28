@@ -9,7 +9,6 @@
 #include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
-using namespace boost::asio;
 
 namespace
 {
@@ -18,9 +17,9 @@ namespace
     const int MIN_ATTEMPTS = 0;
 }
 
-ClientBase::ClientBase(const User& user) 
+ClientBase::ClientBase(const User& user)
         : tcp_sock(service), is_started(true), user(user) {}
-void ClientBase::connect(ip::tcp::endpoint ep) 
+void ClientBase::connect(ip::tcp::endpoint ep)
 {
     tcp_sock.connect(ep);
 }
@@ -32,7 +31,7 @@ void ClientBase::loop() {
         write_request();
         read_answer();
         int millis = rand() % 7000;
-        BOOST_LOG_TRIVIAL(info) << user.login << " postpone ping " 
+        BOOST_LOG_TRIVIAL(info) << user.login << " postpone ping "
                   << millis << " ms";
         boost::this_thread::sleep(boost::posix_time::millisec(millis));
     }
@@ -41,7 +40,7 @@ void ClientBase::loop() {
 void ClientBase::write_request() {
     write("ping\n");
 }
-    
+
 void ClientBase::read_answer() {
     read_count = 0;
     read(tcp_sock, buffer(buff), boost::bind(&ClientBase::read_complete, this, _1, _2));
@@ -66,7 +65,7 @@ void ClientBase::on_ping(const std::string & msg) {
     std::istringstream in(msg);
     std::string answer;
     in >> answer >> answer;
-    if (answer == "client_list_changed") 
+    if (answer == "client_list_changed")
         do_ask_clients();
 }
 
@@ -116,9 +115,9 @@ void Client::create_clients(const char *clients[], const int num)
     BOOST_LOG_TRIVIAL(info) <<  "create_clients";
     boost::thread_group threads;
     Client cl;
-    for ( int i = 0; i < num; i++) {
-        threads.create_thread( boost::bind(&Client::run_client, &cl, clients[i], MIN_ATTEMPTS));
-        boost::this_thread::sleep( boost::posix_time::millisec(100));
+    for ( int i = 0; i < num; i++ ) {
+        threads.create_thread(boost::bind(&Client::run_client, &cl, clients[i], MIN_ATTEMPTS));
+        boost::this_thread::sleep(boost::posix_time::millisec(100));
     }
     threads.join_all();
 }
